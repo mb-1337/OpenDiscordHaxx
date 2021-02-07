@@ -74,8 +74,8 @@ namespace DiscordHaxx
                             if (bot.Client.User.EmailVerified)
                                 bot.Client.User.SetHypesquad(Hypesquad.None);
 
-                            if (bot.Client.User.AvatarId != null)
-                                bot.Client.User.ChangeProfile(new UserProfile() { Avatar = null });
+                            if (bot.Client.User.Avatar != null)
+                                bot.Client.User.ChangeProfile(new UserProfileUpdate() { Avatar = null });
                         }
                         catch { }
 
@@ -83,7 +83,7 @@ namespace DiscordHaxx
                         {
                             foreach (var connection in bot.Client.GetProfile(bot.Client.User.Id).ConnectedAccounts)
                             {
-                                connection.Remove();
+                                bot.Client.RemoveConnectedAccount(connection.Type, connection.Id);
 
                                 Thread.Sleep(100);
                             }

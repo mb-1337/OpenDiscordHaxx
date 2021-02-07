@@ -39,7 +39,7 @@ namespace DiscordHaxx
                 }
                 catch (DiscordHttpException e)
                 {
-                    CheckError(e);
+                    CheckError(e, bot.Client);
                 }
                 catch (RateLimitException) { }
             });

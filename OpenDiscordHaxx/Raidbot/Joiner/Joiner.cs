@@ -9,7 +9,7 @@ namespace DiscordHaxx
     public class Joiner : RaidBot
     {
 #pragma warning disable IDE1006
-        private Invite _invite { get; set; }
+        private DiscordInvite _invite { get; set; }
 #pragma warning restore IDE1006
 
 
@@ -24,7 +24,7 @@ namespace DiscordHaxx
             }
             catch (DiscordHttpException e)
             {
-                if (e.Code == DiscordError.InvalidInvite || e.Code == DiscordError.UnknownInvite)
+                if (e.Code == DiscordError.UnknownInvite)
                 {
                     Console.WriteLine($"[FATAL] {request.Invite} is invalid");
                     
@@ -44,6 +44,7 @@ namespace DiscordHaxx
         {
             Parallel.ForEach(new List<RaidBotClient>(Server.Bots), new ParallelOptions() { MaxDegreeOfParallelism = Threads }, bot =>
             {
+                start:
                 if (ShouldStop)
                     return;
 
@@ -64,17 +65,17 @@ namespace DiscordHaxx
                             if (_invite.Type == InviteType.Group)
                                 ShouldStop = true;
                             break;
-                        case DiscordError.InvalidInvite:
-                            Console.WriteLine($"[ERROR] invalid invite");
-                            break;
+                        case DiscordError.MaximumGuilds:
+                            if (bot.Guilds.First().OwnerId == bot.Client.User.Id) bot.Client.DeleteGuild(bot.Guilds.First().Id);
+                            else bot.Client.LeaveGuild(bot.Guilds.First().Id);
+                            goto start;
                         default:
-                            CheckError(e);
+                            CheckError(e, bot.Client);
                             break;
                     }
                 }
                 catch (RateLimitException) { }
             });
-
             Server.OngoingAttacks.Remove(Attack);
         }
     }

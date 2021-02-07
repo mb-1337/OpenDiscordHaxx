@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Gateway;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace DiscordHaxx
                         var req = obj.ToObject<StartReconRequest>();
 
                         int bots = 0;
-                        Guild guild = null;
+                        DiscordGuild guild = null;
 
                         foreach (var bot in Server.Bots)
                         {
@@ -80,7 +81,7 @@ namespace DiscordHaxx
                             Region = guild.Region,
                             VerificationLevel = guild.VerificationLevel.ToString(),
                             VanityInvite = guild.VanityInvite ?? "None",
-                            BotsInGuild = $"{bots.ToString()}/{Server.Bots.Count}"
+                            BotsInGuild = $"{bots}/{Server.Bots.Count}"
                         };
 
                         foreach (var role in guild.Roles.Where(r => r.Mentionable))

@@ -1,6 +1,8 @@
 # About
-OpenDiscordHaxx is an opensource version of my raidbot 'DiscordHaxx' that was released about half a year ago.<br>
-This raidbot is powered by Anarchy (https://github.com/iLinked1337/Anarchy), which is a powerful API wrapper that specializes in selfbots of all sorts.<br>
+OpenDiscordHaxx is an opensource version of iLinked's raidbot 'DiscordHaxx' that was released about 2 years ago.<br>
+iLinked started this project around a year ago and stopped maintaining it after some time, so I decided to step in and start maintaining it and bring it back to life.<br>
+This raidbot is powered by Anarchy (https://github.com/not-ilinked/Anarchy), which is a powerful API wrapper that specializes in selfbots of all sorts.<br>
+If you find any errors, please open a GitHub issue, but check [known bugs](https://github.com/mb-1337/OpenDiscordHaxx#known-bugs) first to see if I am aware of the issue, or if it is being fixed already.<br>
 
 # Features
 ### Bots
@@ -13,7 +15,7 @@ This raidbot is powered by Anarchy (https://github.com/iLinked1337/Anarchy), whi
 ### Tools
 - Checker
 - Cleaner
-- Server recon
+- Server recon (server info)
 
 ### Other
 - Dashboard
@@ -23,7 +25,7 @@ This raidbot is powered by Anarchy (https://github.com/iLinked1337/Anarchy), whi
 # How to set it up
 First you must find the directory containg 'OpenDHBackend.exe' (in releases that's Backend).<br>
 In this directory you create a file called Tokens.txt, which is where you put your tokens.<br>
-Optionally you can also enable gateway clients by going to Config.json, which will give u more responsive bots.<br>
+Optionally you can also enable gateway clients by going to Config.json, which will give u more responsive bots. (currently a bit broken, see known issues)<br>
 Then to start it up open OpenDHBackend.exe.<br><br>
 
 Next find index.html (Frontend in releases), and open it in your preferred browser.<br><br>
@@ -43,5 +45,12 @@ If your accounts are not working, try putting them through the account checker, 
 
 # Gateway clients
 When your accounts are being loaded, all clients below 50 (or whatever your cap is) will be set as 'socket clients' (makes them more responsive).<br>
-If you are having some memory issues, try turning the limit down in Client/AccountList.cs, Line 45.<br>
+If you are having some memory issues, try turning the limit down in the config fileˇˇ.<br>
 For enabling this, edit Config.json, located in the backend directory.
+
+# Known bugs
+- RaidBotClient.Guilds randomly being null (no fucking idea why), can be prevented by [turning off gateway clients](https://github.com/mb-1337/OpenDiscordHaxx#gateway-clients) (will be fixed soon)
+
+# TODOS
+- better token checking method
+- (maybe) stop using ws endpoints and use opcodes entirely

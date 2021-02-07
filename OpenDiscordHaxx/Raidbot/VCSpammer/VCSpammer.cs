@@ -37,9 +37,9 @@ namespace DiscordHaxx
                     break;
 
                 if (_request.Join)
-                    bot.JoinVoiceChannel(_request.GuildId, _request.ChannelId);
+                    bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId });
                 else
-                    bot.LeaveVoiceChannel(_request.GuildId);
+                    bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId }).Disconnect(); //TODO: somehow get the voice session and disconnect properly  
 
                 Thread.Sleep(_request.Delay);
             }

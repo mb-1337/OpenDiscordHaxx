@@ -51,7 +51,7 @@ namespace DiscordHaxx
             {
                 At = bot.Client.User.ToString(),
                 Id = bot.Client.User.Id.ToString(),
-                AvatarId = bot.Client.User.AvatarId,
+                AvatarId = bot.Client.User.Avatar.Url.Replace($"https://cdn.discordapp.com/avatars/{bot.Client.User.Id}/", ""),
                 Gateway = bot.SocketClient
             };
 
@@ -71,7 +71,7 @@ namespace DiscordHaxx
                     info.Badges.Add(value.ToString());
             }
 
-            if (bot.Client.User.Nitro > NitroType.None)
+            if (bot.Client.User.Nitro != DiscordNitroType.None)
                 info.Badges.Add("Nitro");
 
             if (getGuildsAndFriends)

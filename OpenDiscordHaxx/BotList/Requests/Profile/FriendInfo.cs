@@ -5,7 +5,7 @@ namespace DiscordHaxx
 {
     public class FriendInfo
     {
-        public FriendInfo(Relationship relationship)
+        public FriendInfo(DiscordRelationship relationship)
         {
             At = relationship.User.ToString();
             _id = relationship.User.Id.ToString();

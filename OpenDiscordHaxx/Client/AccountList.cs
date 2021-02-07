@@ -42,7 +42,6 @@ namespace DiscordHaxx
                 Server.ServerStatus = "Loading bots";
                 _tokensLoading = true;
 
-
                 string[] tokens = File.Exists("Tokens.txt") 
                                         ? File.ReadAllLines("Tokens.txt") : new string[] { };
 
@@ -68,7 +67,7 @@ namespace DiscordHaxx
                         Accounts.Add(client);
                         BotListEndpoint.UpdateList(ListAction.Add, client);
                     }
-                    catch (DiscordHttpException) { }
+                    catch (InvalidTokenException) { }
                     catch (Exception e)
                     {
                         Console.WriteLine($"Unknown error when loading account:\n{e}");
@@ -117,7 +116,7 @@ namespace DiscordHaxx
         private void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
         {
             RaidBotClient raidClient = Accounts.First(acc => acc.Client.User.Id == client.User.Id);
-            raidClient.Guilds = args.Guilds.Cast<Guild>().ToList(); 
+            raidClient.Guilds = args.Guilds.Cast<SocketGuild>().ToList(); 
             raidClient.Relationships = args.Relationships.ToList();
         }
 

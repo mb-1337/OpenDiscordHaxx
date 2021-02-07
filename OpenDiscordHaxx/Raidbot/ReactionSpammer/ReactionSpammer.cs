@@ -51,7 +51,7 @@ namespace DiscordHaxx
                             Console.WriteLine($"[ERROR] Unknown emoji");
                             break;
                         default:
-                            CheckError(e);
+                            CheckError(e, bot.Client);
                             break;
                     }
                 }

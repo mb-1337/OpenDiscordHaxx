@@ -67,7 +67,7 @@ namespace DiscordHaxx
                     client.Client.User.SetHypesquad(req.Hypesquad);
 
                 if (req.Avatar != null)
-                    client.Client.User.ChangeProfile(new UserProfile() { Avatar = req.Avatar });
+                    client.Client.User.ChangeProfile(new UserProfileUpdate() { Avatar = req.Avatar });
 
                 if (!client.SocketClient)
                     client.Client.User.Update();

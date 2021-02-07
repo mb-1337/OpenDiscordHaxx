@@ -54,7 +54,7 @@ namespace DiscordHaxx
                     if (e.Code == DiscordError.InvalidRecipient)
                         Console.WriteLine($"[ERROR] invalid recipient");
                     else
-                        CheckError(e);
+                        CheckError(e, bot.Client);
                 }
                 catch (RateLimitException) { }
             });

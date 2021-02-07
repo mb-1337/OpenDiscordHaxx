@@ -16,7 +16,7 @@ namespace DiscordHaxx
         }
 
 
-        public bool TrySendMessage(string message, Embed embed)
+        public bool TrySendMessage(string message, DiscordEmbed embed)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace DiscordHaxx
                 if (e.Code == DiscordError.ChannelVerificationTooHigh)
                     Console.WriteLine("[ERROR] channel verification too high");
                 else
-                    RaidBot.CheckError(e);
+                    RaidBot.CheckError(e, _client);
 
                 return false;
             }

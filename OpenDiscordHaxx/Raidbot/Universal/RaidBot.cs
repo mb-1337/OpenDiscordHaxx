@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Gateway;
 using System;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace DiscordHaxx
         public abstract void Start();
 
 
-        public static void CheckError(DiscordHttpException ex)
+        public static void CheckError(DiscordHttpException ex, DiscordClient _bot)
         {
             switch (ex.Code)
             {
@@ -25,11 +26,11 @@ namespace DiscordHaxx
                     Console.WriteLine("[ERROR] invalid guild");
                     break;
                 case DiscordError.AccountUnverified:
-                    Console.WriteLine($"[ERROR] {ex.Client.User} is unverified and has been removed from the bot list");
+                    Console.WriteLine($"[ERROR] {_bot} is unverified and has been removed from the bot list");
 
                     try
                     {
-                        Server.Bots.Remove(Server.Bots.First(bot => bot.Client.User.Id == ex.Client.User.Id));
+                        Server.Bots.Remove(Server.Bots.First(bot => bot.Client.User.Id == _bot.User.Id));
                     }
                     catch { }
                     break;

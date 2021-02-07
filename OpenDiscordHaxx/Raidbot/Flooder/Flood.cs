@@ -26,6 +26,6 @@ namespace DiscordHaxx
 
 
         [JsonProperty("embed")]
-        public Embed Embed { get; private set; }
+        public DiscordEmbed Embed { get; private set; }
     }
 }
