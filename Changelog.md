@@ -1,3 +1,12 @@
+# 0.1.0.1 (the rebirth)
+### Additions
+- Not much yet, this release is to make it function (or at least minimally) and to provide a download.
+
+### Improvements
+- Made it work again with the latest version of Anarchy.
+
+
+
 # 0.1.0.0
 
 ### Additions
