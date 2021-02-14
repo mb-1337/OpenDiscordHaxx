@@ -52,7 +52,7 @@ If you are having some memory issues, try turning the limit down in the config f
 For enabling this, edit Config.json, located in the backend directory.
 
 # Known bugs
-- RaidBotClient.Guilds randomly being null (no fucking idea why), can be prevented by [turning off gateway clients](https://github.com/mb-1337/OpenDiscordHaxx#gateway-clients) (will be fixed soon)
+- none right now, please create an issue if you encounter one :)
 
 # TODOS
 - better token checking method
