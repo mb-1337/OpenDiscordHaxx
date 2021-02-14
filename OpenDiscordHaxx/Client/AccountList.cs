@@ -56,7 +56,7 @@ namespace DiscordHaxx
 
                         if (Accounts.Count <= _config.GatewayCap && _config.EnableGateway)
                         {
-                            DiscordSocketClient sClient = new DiscordSocketClient();
+                            DiscordSocketClient sClient = new DiscordSocketClient(new DiscordSocketConfig() { ApiVersion = 6 }); //v8 for some reason doesnt wanna send the ready event (might be an anarchy issue tho)
                             sClient.OnLoggedIn += Client_OnLoggedIn;
                             sClient.Login(token);
                             client = new RaidBotClient(sClient);

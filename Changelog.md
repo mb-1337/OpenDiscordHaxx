@@ -1,3 +1,14 @@
+# 0.1.0.2
+### Additions
+- Added emoji formatting examples to reaction spammer, so people know what to enter (not much, i know, it's still in the bugfixing state)
+
+### Improvements
+- Fixed crash if no id was provided (server recon)
+- Fixed crash if bot is not in the guild (vc spammer)
+- It now creates a config.json if not present
+
+
+
 # 0.1.0.1 (the rebirth)
 ### Additions
 - Not much yet, this release is to make it function (or at least minimally) and to provide a download.

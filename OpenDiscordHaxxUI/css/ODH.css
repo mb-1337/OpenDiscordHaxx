@@ -15,6 +15,10 @@ div ul li ul li a:hover  {
 }
 /* end of stuff for nav bar */
 
+div img {
+    height: 1em;
+    width: auto;
+}
 
 .dark-body {
     background-color: rgb(54,57,63); 

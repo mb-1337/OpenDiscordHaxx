@@ -5,6 +5,7 @@
         Id,
         StartRecon,
         ReconCompleted,
-        ReconFailed
+        ReconFailed,
+        NoId
     }
 }

@@ -4,14 +4,15 @@ const ReconOpcode = {
     Id: 0,
     StartRecon: 1,
     ReconCompleted: 2,
-    ServerNotFound: 3
+    ServerNotFound: 3,
+    NoId: 4
 }
 
 
-window.onload = function() {
+window.onload = function () {
     socket = new WebSocket("ws://localhost:420/recon");
-    socket.onmessage = function(args) {
-        
+    socket.onmessage = function (args) {
+
         const payload = JSON.parse(args.data);
 
         if (payload.op == ReconOpcode.Id)
@@ -26,20 +27,35 @@ window.onload = function() {
                 break;
             case ReconOpcode.ServerNotFound:
                 UpdateRecon({
-                    name: 'Please enter a server ID',
+                    name: 'No server found matching the provided id!',
                     description: 'No description',
                     region: 'Unknown',
                     verification: 'Unknown',
                     vanity_invite: 'None',
                     roles: [],
+                    emojis: [],
                     bots_in_guild: 'No'
                 });
 
                 ShowToast(ToastType.Error, 'Server was not found');
                 break;
+            case ReconOpcode.NoId:
+                UpdateRecon({
+                    name: 'No id provided!',
+                    description: 'No description',
+                    region: 'Unknown',
+                    verification: 'Unknown',
+                    vanity_invite: 'None',
+                    roles: [],
+                    emojis: [],
+                    bots_in_guild: 'No'
+                });
+
+                ShowToast(ToastType.Error, 'Please provide an id');
+                break;
         }
     }
-    socket.onerror = function() { ServerUnreachable() };
+    socket.onerror = function () { ServerUnreachable() };
 }
 
 
@@ -67,7 +83,7 @@ function UpdateRecon(data) {
         let row = roleList.insertRow(roleList.rows.length);
         row.id = 'role-row-' + i;
         row.innerHTML = '<td>' + data.roles[i].name + '</td>\n'
-                        + '<td>' + data.roles[i].id + '</td>\n';
+            + '<td>' + data.roles[i].id + '</td>\n';
 
         $('#' + row.id).contextMenu({
             menuSelector: '#roles-context-menu',
@@ -77,7 +93,7 @@ function UpdateRecon(data) {
                 switch (selectedMenu.text()) {
                     case "Get messagable":
                         $('#transformed-modal').modal({ show: true });
-                            
+
                         document.getElementById('transformed-modal-title').innerText = info.name + ' as messagable';
                         document.getElementById('transformed').innerText = '<@&' + info.id + '>';
                         break;
@@ -92,7 +108,7 @@ function UpdateRecon(data) {
         let row = emojiList.insertRow(emojiList.rows.length);
         row.id = 'emoji-row-' + i;
         row.innerHTML = '<td>' + data.emojis[i].name + '</td>\n'
-                        + '<td>' + data.emojis[i].id + '</td>\n';
+            + '<td>' + data.emojis[i].id + '</td>\n';
 
         $('#' + row.id).contextMenu({
             menuSelector: '#emojis-context-menu',
@@ -121,6 +137,8 @@ function UpdateRecon(data) {
 
 
 function GetRowInformation(row) {
-    return { name: row.childNodes[0].innerText, 
-             id: row.childNodes[2].innerText };
+    return {
+        name: row.childNodes[0].innerText,
+        id: row.childNodes[2].innerText
+    };
 }

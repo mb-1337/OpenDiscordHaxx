@@ -37,10 +37,16 @@ namespace DiscordHaxx
                     break;
 
                 if (_request.Join)
-                    bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId });
+                    try
+                    {
+                        bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId });
+                    }
+                    catch { }
                 else
-                    bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId }).Disconnect(); //TODO: somehow get the voice session and disconnect properly  
-
+                    try
+                    {
+                        bot.JoinVoiceChannel(new VoiceStateProperties() { GuildId = _request.GuildId, ChannelId = _request.ChannelId }).Disconnect(); //TODO: somehow get the voice session and disconnect properly  
+                    } catch { }
                 Thread.Sleep(_request.Delay);
             }
 

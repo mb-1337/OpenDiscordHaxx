@@ -1,5 +1,4 @@
 ﻿using Discord;
-using Discord.Gateway;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
@@ -12,7 +11,6 @@ namespace DiscordHaxx
     {
         private static int _nextId;
         private int _id;
-
 
         protected override void OnOpen()
         {
@@ -32,6 +30,7 @@ namespace DiscordHaxx
                 case ReconOpcode.StartRecon:
                     Task.Run(() =>
                     {
+                        if (obj.GetValue("guild_id").ToString() == "") { SocketServer.Broadcast("/recon", new ReconRequest(_id, ReconOpcode.NoId)); return; }
                         var req = obj.ToObject<StartReconRequest>();
 
                         int bots = 0;

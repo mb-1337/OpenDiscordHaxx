@@ -81,7 +81,39 @@
   <br>
   <input type="number" min="1" class="form-control dark-input center-block" style="width: 340px;" placeholder="Message ID" id="message_id">
   <br>
-  <input class="form-control dark-input center-block" style="width: 340px;" placeholder="Reaction" id="reaction">
+  <input class="form-control dark-input center-block" style="width: 340px;" placeholder="Reaction emoji" id="reaction">
+  <button class="btn dark-btn center-block" style="width: 240px; margin-top: 24px" data-toggle="modal" data-target="#emojiFormattingModal">View emoji formatting examples</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="emojiFormattingModal" tabindex="-1" role="dialog" aria-labelledby="emojiFormattingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header dark-container">
+          <button type="button" class="close dark-btn" style="background-color: unset !important;" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title dark-title" id="emojiFormattingModalLabel">Emoji formatting examples</h4>
+        </div>
+        <div class="modal-body dark-container">
+          Discord accepts 3 types of emojis:<br>
+          - Unicode characters/emojis: 👍 -&gt; <img id="thumbImage" onmouseover="$('#thumbImage').tooltip() /* fuck jquery i hate it */" data-toggle="tooltip" data-placement="top" title=":thumbsup:" src="https://discord.com/assets/08c0a077780263f3df97613e58e71744.svg"><br>
+          - Custom emojis: :kek:750253062689652768 -&gt; <img id="kekImage" onmouseover="$('#kekImage').tooltip() /* fuck jquery i hate it */" data-toggle="tooltip" data-placement="top" title=":kek:" src="https://cdn.discordapp.com/emojis/750253062689652768.png"><br>
+          - Animated emojis: a:frog:805846391578558495 -&gt; <img id="frogImage" onmouseover="$('#frogImage').tooltip() /* fuck jquery i hate it */" data-toggle="tooltip" data-placement="top" title=":frog:" src="https://cdn.discordapp.com/emojis/805846391578558495.gif"><br>
+          <br>
+          How to get emoji ids (and names):<br>
+          1. Ctrl-shift-i &gt; network tab<br>
+          2. Send the emoji in a channel/dm<br>
+          3. On the left under "Names" a new request will pop up (it should say "messages")<br>
+          4. Click on it and go to preview tab<br>
+          5. Look for content (it should say something like <b>content: "&lt;a:frog:805846391578558495&gt;"</b>), this is the name and id of the emoji, so you can simply copy it over to the reaction input field (don't forget to remove the &lt; and &gt;).<br><br>
+          If you're on the desktop version, you can enable developer mode, rightclick the emoji sent in chat and click copy id.
+        </div>
+        <div class="modal-footer dark-container">
+          <button type="button" class="btn dark-btn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <center>
     <div style="margin-top: 10px">
